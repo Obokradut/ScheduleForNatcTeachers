@@ -1,4 +1,4 @@
-package com.example.schedulefornatcteachers.ui.theme
+package com.konokradus.schedulefornatcteachers.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

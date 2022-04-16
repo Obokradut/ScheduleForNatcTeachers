@@ -1,4 +1,4 @@
-package com.example.schedulefornatcteachers
+package com.konokradus.schedulefornatcteachers
 
 import org.junit.Test
 
