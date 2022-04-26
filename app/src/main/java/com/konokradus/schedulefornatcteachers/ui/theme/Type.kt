@@ -21,6 +21,7 @@ val Roboto = FontFamily(
 data class ScheduleTypography(
     val topBarText: TextStyle,
     val title: TextStyle,
+    val titleBold: TextStyle,
     val dateTitle: TextStyle
 )
 
@@ -36,6 +37,11 @@ val ScheduleTypographyImpl = ScheduleTypography(
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         letterSpacing = 0.sp
+    ),
+    titleBold = TextStyle(
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
     ),
     dateTitle = TextStyle(
         fontFamily = Roboto,
