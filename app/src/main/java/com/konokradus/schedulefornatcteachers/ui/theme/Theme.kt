@@ -23,7 +23,10 @@ private val LightColorPalette = ScheduleColors(
     border = GrayUltimate,
     photoBox = GrayUltimate,
     dateBox = DateBar,
-    ultimateTitle = DarkGrayTitle
+    ultimateTitle = DarkGrayTitle,
+    darkTopBar = DarkTopBar,
+    menuBackground = MenuBackground,
+    menuButton = MenuButton
 )
 
 @Composable

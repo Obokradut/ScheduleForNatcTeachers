@@ -31,7 +31,8 @@ fun TopBar(title: String) {
         shape = RoundedCornerShape(
             topEnd = 0.dp, topStart = 0.dp,
             bottomStart = 6.dp, bottomEnd = 6.dp
-        )
+        ),
+        elevation = 10.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))
