@@ -31,7 +31,7 @@ fun Menu(
     Box(
         modifier = Modifier
             .background(ScheduleTheme.colors.menuBackground)
-            .fillMaxHeight()
+            .fillMaxSize()
     ) {
         Column() {
             MenuTopBar()
@@ -41,17 +41,17 @@ fun Menu(
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_menu),
                 title = TitlesTopBarImp.teachersList,
-                onClick = {onTeachersListClick}
+                onClick = onTeachersListClick
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_favorites),
                 title = TitlesTopBarImp.favorites,
-                onClick = {onFavoritesClick}
+                onClick = onFavoritesClick
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_offices),
                 title = TitlesTopBarImp.offices,
-                onClick = {onOfficesClick}
+                onClick = onOfficesClick
             )
 
             Spacer(modifier = Modifier.height(45.dp))
@@ -59,12 +59,12 @@ fun Menu(
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_options),
                 title = TitlesTopBarImp.options,
-                onClick = {onOptionsClick}
+                onClick = onOptionsClick
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_info),
                 title = TitlesTopBarImp.info,
-                onClick = {onInfoClick}
+                onClick = onInfoClick
             )
         }
     }

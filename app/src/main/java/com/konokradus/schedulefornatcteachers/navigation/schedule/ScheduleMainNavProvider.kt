@@ -1,14 +1,16 @@
 package com.konokradus.schedulefornatcteachers.navigation.schedule
 
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class ScheduleMainNavProvider : IScheduleMainNavProvider {
 
-    private val _currentNavFlow: MutableStateFlow<ScheduleMainDestinations> = MutableStateFlow(ScheduleMainDestinations.Drawer)
+    private val _currentNavFlow: MutableSharedFlow<ScheduleMainDestinations> = MutableSharedFlow(replay = 1, extraBufferCapacity = 1)
 
 
-    override val currentNavFlow: StateFlow<ScheduleMainDestinations>
+    override val currentNavFlow: SharedFlow<ScheduleMainDestinations>
         get() = _currentNavFlow
 
     override fun navigateToDrawer() {

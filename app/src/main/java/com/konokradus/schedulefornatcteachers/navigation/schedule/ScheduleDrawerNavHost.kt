@@ -19,12 +19,15 @@ fun ScheduleDrawerNavHost(
     drawerViewModel: ScheduleDrawerViewModel
 ) {
     LaunchedEffect(key1 = true){
-        drawerViewModel.drawerNavProvider.currentNavFlow.collect{ destination ->
+        drawerViewModel.drawerNavProvider.currentNavFlow.onEach{ destination ->
             if (destination is ScheduleDrawerDestinations.PopBack)
                 navHostController.popBackStack()
             else
-                navHostController.navigate(destination.route)
-        }
+                navHostController.navigate(destination.route) {
+                    launchSingleTop = true
+                    popUpTo(navHostController.graph.startDestinationId)
+                }
+        }.launchIn(this)
     }
 
     NavHost(

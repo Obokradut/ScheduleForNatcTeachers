@@ -24,7 +24,7 @@ fun ScheduleDrawerContainer(
         scaffoldState = scaffoldState,
         topBar = {
             TopBar(
-                title = TitlesTopBarImp.teachersList,
+                navController = navController,
                 onMenuClick = {
                     coroutineScope.launch {
                         scaffoldState.drawerState.open()
@@ -34,11 +34,26 @@ fun ScheduleDrawerContainer(
         },
         drawerContent = {
             Menu(
-                onFavoritesClick = drawerViewModel.drawerNavProvider :: navigateToFavorites,
-                onInfoClick = drawerViewModel.drawerNavProvider :: navigateToInfo,
+                onFavoritesClick = {
+                    drawerViewModel.drawerNavProvider.navigateToFavorites()
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                },
+                onInfoClick = {
+                    drawerViewModel.drawerNavProvider.navigateToInfo()
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                },
                 onOfficesClick = {},
                 onOptionsClick = {},
-                onTeachersListClick = drawerViewModel.drawerNavProvider :: navigateToTeachersList
+                onTeachersListClick = {
+                    drawerViewModel.drawerNavProvider.navigateToTeachersList()
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                }
             )
         }
     ) {

@@ -11,8 +11,10 @@ import androidx.compose.ui.Modifier
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.ScheduleDrawerContainer
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.ScheduleMainContainer
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleForNatcTeachersTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterialApi
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

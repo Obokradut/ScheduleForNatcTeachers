@@ -19,14 +19,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.konokradus.schedulefornatcteachers.R
+import com.konokradus.schedulefornatcteachers.navigation.schedule.ScheduleDrawerDestinations
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
 fun TopBar(
-    title: String,
+    navController: NavController,
     onMenuClick: () -> Unit
 ) {
+    val curEntry = navController.currentBackStackEntryAsState()
+    val title = when(curEntry.value?.destination?.route) {
+        ScheduleDrawerDestinations.Favorites.route -> TitlesTopBarImp.favorites
+        ScheduleDrawerDestinations.Info.route -> TitlesTopBarImp.info
+        ScheduleDrawerDestinations.TeachersList.route -> TitlesTopBarImp.teachersList
+        else -> ""
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,6 +62,7 @@ fun TopBar(
 
             Spacer(modifier = Modifier.width(5.dp))
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 text = title,
                 style = ScheduleTheme.typography.topBarText,
                 textAlign = TextAlign.Center,
@@ -65,8 +77,5 @@ fun TopBar(
 @Preview
 @Composable
 private fun Preview() {
-    TopBar(
-        title = TitlesTopBarImp.teachersList,
-        onMenuClick = {}
-    )
+
 }
