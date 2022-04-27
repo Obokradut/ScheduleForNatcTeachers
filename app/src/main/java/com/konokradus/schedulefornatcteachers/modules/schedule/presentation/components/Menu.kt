@@ -3,6 +3,7 @@ package com.konokradus.schedulefornatcteachers.modules.schedule.presentation.com
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -18,8 +19,15 @@ import androidx.compose.ui.unit.sp
 import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
+@ExperimentalMaterialApi
 @Composable
-fun Menu() {
+fun Menu(
+    onTeachersListClick: () -> Unit,
+    onFavoritesClick: () -> Unit,
+    onOfficesClick: () -> Unit,
+    onOptionsClick: () -> Unit,
+    onInfoClick: () -> Unit,
+) {
     Box(
         modifier = Modifier
             .background(ScheduleTheme.colors.menuBackground)
@@ -33,17 +41,17 @@ fun Menu() {
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_menu),
                 title = TitlesTopBarImp.teachersList,
-                onClick = {}
+                onClick = {onTeachersListClick}
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_favorites),
                 title = TitlesTopBarImp.favorites,
-                onClick = {}
+                onClick = {onFavoritesClick}
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_offices),
                 title = TitlesTopBarImp.offices,
-                onClick = {}
+                onClick = {onOfficesClick}
             )
 
             Spacer(modifier = Modifier.height(45.dp))
@@ -51,12 +59,12 @@ fun Menu() {
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_options),
                 title = TitlesTopBarImp.options,
-                onClick = {}
+                onClick = {onOptionsClick}
             )
             NavButton(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_info),
                 title = TitlesTopBarImp.info,
-                onClick = {}
+                onClick = {onInfoClick}
             )
         }
     }
@@ -97,46 +105,17 @@ private fun MenuTopBar() {
     }
 }
 
-@Composable
-fun NavButton(
-    icon: ImageVector,
-    title: String,
-    onClick: () -> Unit
-) {
-    Column() {
-        Surface(
-            modifier = Modifier
-                .width(340.dp)
-                .height(60.dp),
-            color = ScheduleTheme.colors.menuButton,
-            shape = RoundedCornerShape(6.dp),
-            elevation = 10.dp
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Spacer(modifier = Modifier.width(10.dp))
-                Icon(
-                    modifier = Modifier.size(35.dp),
-                    imageVector = icon,
-                    contentDescription = "icon",
-                    tint = ScheduleTheme.colors.layoutBackground
-                )
-                Spacer(modifier = Modifier.width(5.dp))
-                Text(
-                    text = title,
-                    style = ScheduleTheme.typography.menuButtonText,
-                    textAlign = TextAlign.Left,
-                    color = ScheduleTheme.colors.layoutBackground,
-                    fontSize = 20.sp,
-                    softWrap = true
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-    }
-}
 
+
+@ExperimentalMaterialApi
 @Preview
 @Composable
 private fun Preview() {
-    Menu()
+    Menu(
+        onFavoritesClick = {},
+        onInfoClick = {},
+        onOfficesClick = {},
+        onOptionsClick = {},
+        onTeachersListClick = {},
+    )
 }

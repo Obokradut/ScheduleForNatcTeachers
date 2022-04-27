@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +23,10 @@ import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
-fun TopBar(title: String) {
+fun TopBar(
+    title: String,
+    onMenuClick: () -> Unit
+) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,12 +40,15 @@ fun TopBar(title: String) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))
-            Icon(
-                modifier = Modifier.size(40.dp),
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_menu),
-                contentDescription = "ic_menu",
-                tint = ScheduleTheme.colors.layoutBackground
-            )
+            IconButton(onClick = onMenuClick) {
+                Icon(
+                    modifier = Modifier.size(40.dp),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_menu),
+                    contentDescription = "ic_menu",
+                    tint = ScheduleTheme.colors.layoutBackground
+                )
+            }
+
             Spacer(modifier = Modifier.width(5.dp))
             Text(
                 text = title,
@@ -58,5 +65,8 @@ fun TopBar(title: String) {
 @Preview
 @Composable
 private fun Preview() {
-    TopBar(title = TitlesTopBarImp.teachersList)
+    TopBar(
+        title = TitlesTopBarImp.teachersList,
+        onMenuClick = {}
+    )
 }

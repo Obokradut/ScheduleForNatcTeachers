@@ -22,12 +22,15 @@ import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTypography
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTypographyImpl
 
 @Composable
-fun SearchBox() {
-    val searchFIO = remember{ mutableStateOf("")}
+fun SearchBox(
+    value: String,
+    onValueChange: (String) -> Unit
+) {
     Surface(
         modifier = Modifier
-            .width(390.dp)
-            .height(60.dp),
+            .height(60.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
         color = ScheduleTheme.colors.searchBox,
         shape = RoundedCornerShape(
             topEnd = 0.dp, topStart = 0.dp,
@@ -35,9 +38,8 @@ fun SearchBox() {
         )
     ) {
         TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = searchFIO.value,
-            onValueChange = {searchFIO.value = it},
+            value = value,
+            onValueChange = onValueChange,
             placeholder = {
                 Text(
                     text = "Поиск",
@@ -52,5 +54,4 @@ fun SearchBox() {
 @Preview
 @Composable
 private fun Preview() {
-    SearchBox()
 }
