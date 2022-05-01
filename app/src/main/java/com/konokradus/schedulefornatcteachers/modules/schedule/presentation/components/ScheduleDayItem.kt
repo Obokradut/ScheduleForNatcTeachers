@@ -21,29 +21,45 @@ import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 @Preview
 @Composable
 private fun Preview() {
-    ScheduleDayItem("ПТ — 20.02.22")
+    ScheduleDayItem("ПТ — 20.02.22") {
+        LessonItem(
+            lesson = "asdf",
+            timeStartEnd = "asdf",
+            group = "asdf",
+            auditorium = "asdf"
+        )
+        LessonItem(
+            lesson = "asdf",
+            timeStartEnd = "asdf",
+            group = "asdf",
+            auditorium = "asdf"
+        )
+        LessonItem(
+            lesson = "asdf",
+            timeStartEnd = "asdf",
+            group = "asdf",
+            auditorium = "asdf"
+        )
+        LessonItem(
+            lesson = "asdf",
+            timeStartEnd = "asdf",
+            group = "asdf",
+            auditorium = "asdf"
+        )
+
+    }
 }
 
 @Composable
-private fun ScheduleDayItem(
-    date: String
+fun ScheduleDayItem(
+    date: String,
+    content: @Composable LessonsGroupScope.() -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         ScheduleDate(date)
         Spacer(modifier = Modifier.height(15.dp))
-        //TODO Сделать спавнер занятий
-        LessonItem(
-            lesson = "Мат. моделирование",
-            timeStartEnd = "08:30-10:10",
-            group = "ПР-315",
-            auditorium = "№368",
-        )
-        Spacer(modifier = Modifier.height(15.dp))
-        LessonItem(
-            lesson = "Правовое право",
-            timeStartEnd = "10:10-12:30",
-            group = "ПР-316",
-            auditorium = "№451",
-        )
+        Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
+            LessonsGroupScopeImpl.content()
+        }
     }
 }

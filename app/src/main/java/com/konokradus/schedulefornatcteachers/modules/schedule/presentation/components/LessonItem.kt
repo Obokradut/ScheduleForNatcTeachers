@@ -12,53 +12,57 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
-@Composable
-fun LessonItem(
-    lesson: String,
-    timeStartEnd: String,
-    group: String,
-    auditorium: String
-) {
-    Surface(
-        modifier = Modifier.width(370.dp),
-        shape = RoundedCornerShape(6.dp, 6.dp, 0.dp, 0.dp),
-        border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border)
+interface LessonsGroupScope{
+    @Composable
+    fun LessonItem(
+        lesson: String,
+        timeStartEnd: String,
+        group: String,
+        auditorium: String
     ) {
-        Column() {
-            Text(
-                text = lesson,
-                textAlign = TextAlign.Center,
-                style = ScheduleTheme.typography.titleBold,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(ScheduleTheme.colors.searchBox),
-                color = ScheduleTheme.colors.ultimateTitle
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Surface(
-                    border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
-                    modifier = Modifier.width(160.dp)
+        Surface(
+            modifier = Modifier.width(370.dp),
+            shape = RoundedCornerShape(6.dp, 6.dp, 0.dp, 0.dp),
+            border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border)
+        ) {
+            Column() {
+                Text(
+                    text = lesson,
+                    textAlign = TextAlign.Center,
+                    style = ScheduleTheme.typography.titleBold,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(ScheduleTheme.colors.searchBox),
+                    color = ScheduleTheme.colors.ultimateTitle
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    ScheduleText(text = timeStartEnd)
-                }
-                Surface(
-                    border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
-                    modifier = Modifier.width(115.dp)
-                ) {
-                    ScheduleText(text = group)
-                }
-                Surface(
-                    border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
-                    modifier = Modifier.width(95.dp)
-                ) {
-                    ScheduleText(text = auditorium)
+                    Surface(
+                        border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
+                        modifier = Modifier.width(160.dp)
+                    ) {
+                        ScheduleText(text = timeStartEnd)
+                    }
+                    Surface(
+                        border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
+                        modifier = Modifier.width(115.dp)
+                    ) {
+                        ScheduleText(text = group)
+                    }
+                    Surface(
+                        border = BorderStroke(width = 2.dp, color = ScheduleTheme.colors.border),
+                        modifier = Modifier.width(95.dp)
+                    ) {
+                        ScheduleText(text = auditorium)
+                    }
                 }
             }
         }
     }
 }
+
+object LessonsGroupScopeImpl: LessonsGroupScope
 
 @Composable
 private fun ScheduleText(text:String) {

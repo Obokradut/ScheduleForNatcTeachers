@@ -10,6 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.ScheduleDrawerContainer
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.ScheduleMainContainer
+import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.TeacherSchedule
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleForNatcTeachersTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ScheduleMainContainer()
+                   /* ScheduleMainContainer()*/
+                    TeacherSchedule(fio = "Деченков Максим Сергеевич")
                 }
             }
         }
