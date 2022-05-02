@@ -32,9 +32,10 @@ fun TopBar(
 ) {
     val curEntry = navController.currentBackStackEntryAsState()
     val title = when(curEntry.value?.destination?.route) {
-        ScheduleDrawerDestinations.Favorites.route -> TitlesTopBarImp.favorites
-        ScheduleDrawerDestinations.Info.route -> TitlesTopBarImp.info
         ScheduleDrawerDestinations.TeachersList.route -> TitlesTopBarImp.teachersList
+        ScheduleDrawerDestinations.Favorites.route -> TitlesTopBarImp.favorites
+        ScheduleDrawerDestinations.Offices.route -> TitlesTopBarImp.offices
+        ScheduleDrawerDestinations.Info.route -> TitlesTopBarImp.info
         else -> ""
     }
 
@@ -47,7 +48,7 @@ fun TopBar(
             topEnd = 0.dp, topStart = 0.dp,
             bottomStart = 6.dp, bottomEnd = 6.dp
         ),
-        elevation = 10.dp
+        elevation = 40.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))

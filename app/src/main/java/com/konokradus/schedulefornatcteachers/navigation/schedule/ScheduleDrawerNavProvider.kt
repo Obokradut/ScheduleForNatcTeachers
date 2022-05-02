@@ -16,12 +16,16 @@ class ScheduleDrawerNavProvider : IScheduleDrawerNavProvider {
         _currentNavFlow.tryEmit(ScheduleDrawerDestinations.TeachersList)
     }
 
-    override fun navigateToInfo() {
-        _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Info)
-    }
-
     override fun navigateToFavorites() {
         _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Favorites)
+    }
+
+    override fun navigateToOffices() {
+        _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Offices)
+    }
+
+    override fun navigateToInfo() {
+        _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Info)
     }
 
     override fun popBack() {

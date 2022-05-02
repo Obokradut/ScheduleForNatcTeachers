@@ -26,8 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   /* ScheduleMainContainer()*/
-                    TeacherSchedule(fio = "Деченков Максим Сергеевич")
+                    ScheduleMainContainer()
                 }
             }
         }

@@ -12,7 +12,7 @@ data class TitlesTopBar(
 
 val TitlesTopBarImp = TitlesTopBar(
     teachersList = "СПИСОК ПРЕПОДАВАТЕЛЕЙ",
-    favorites = "ИЗБРАННЫЕ",
+    favorites = "ИЗБРАННОЕ",
     schedule = "РАСПИСАНИЕ",
     offices = "КАБИНЕТЫ",
     menu = "МЕНЮ",

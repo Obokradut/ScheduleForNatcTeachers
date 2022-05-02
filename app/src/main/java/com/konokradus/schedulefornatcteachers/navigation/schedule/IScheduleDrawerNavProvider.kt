@@ -5,7 +5,8 @@ import kotlinx.coroutines.flow.SharedFlow
 interface IScheduleDrawerNavProvider {
     val currentNavFlow: SharedFlow<ScheduleDrawerDestinations>
     fun navigateToTeachersList()
-    fun navigateToInfo()
     fun navigateToFavorites()
+    fun navigateToOffices()
+    fun navigateToInfo()
     fun popBack()
 }
