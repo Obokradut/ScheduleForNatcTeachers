@@ -12,7 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
-fun TeachersListScreen(){
+fun TeachersListScreen(
+    teachersList: List<String>
+){
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -54,27 +56,6 @@ fun TeachersListScreen(){
 @Composable
 private fun Preview(){
     Box(Modifier.background(Color.White)){
-        TeachersListScreen()
+ /*       TeachersListScreen()*/
     }
 }
-
-private val teachersList = listOf(
-    "Деченков Максим Сергеевич",
-    "Емельянов Павел Отецович",
-    "Труков Владимир Алексеевич",
-    "Бурцев Владислав ОлегочивТинькофф",
-    "Архипов Константин АдинОтец",
-    "Сиринёв Максим Латвиец",
-    "Деченков Максим Сергеевич",
-    "Емельянов Павел Отецович",
-    "Труков Владимир Алексеевич",
-    "Бурцев Владислав ОлегочивТинькофф",
-    "Архипов Константин АдинОтец",
-    "Сиринёв Максим Латвиец",
-    "Деченков Максим Сергеевич",
-    "Емельянов Павел Отецович",
-    "Труков Владимир Алексеевич",
-    "Бурцев Владислав ОлегочивТинькофф",
-    "Архипов Константин АдинОтец",
-    "Сиринёв Максим Латвиец",
-)

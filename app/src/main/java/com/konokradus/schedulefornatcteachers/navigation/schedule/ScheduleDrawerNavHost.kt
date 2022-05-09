@@ -2,10 +2,12 @@ package com.konokradus.schedulefornatcteachers.navigation.schedule
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.ScheduleDrawerViewModel
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.TeachersListViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.InfoScreen
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.OfficesScreen
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.TeachersListScreen
@@ -36,7 +38,8 @@ fun ScheduleDrawerNavHost(
         composable(
             route = ScheduleDrawerDestinations.TeachersList.route
         ) {
-            TeachersListScreen()
+            val viewModel = hiltViewModel<TeachersListViewModel>()
+            TeachersListScreen(viewModel.teachersList.value)
         }
         composable(
             route = ScheduleDrawerDestinations.Favorites.route
