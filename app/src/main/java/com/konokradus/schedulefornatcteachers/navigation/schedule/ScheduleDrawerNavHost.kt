@@ -38,8 +38,12 @@ fun ScheduleDrawerNavHost(
         composable(
             route = ScheduleDrawerDestinations.TeachersList.route
         ) {
-            val viewModel = hiltViewModel<TeachersListViewModel>()
-            TeachersListScreen(viewModel.teachersList.value)
+            val teacherViewModel = hiltViewModel<TeachersListViewModel>()
+            TeachersListScreen(
+                searchFio = teacherViewModel.searchBox.value,
+                searchChanged = teacherViewModel::searchChanged,
+                teachersListViewState = teacherViewModel.teacherViewState.value
+            )
         }
         composable(
             route = ScheduleDrawerDestinations.Favorites.route
