@@ -6,14 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.TeachersListViewState
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.formatNavArgumentToNavigate
+import com.konokradus.schedulefornatcteachers.navigation.schedule.IScheduleMainNavProvider
 import com.konokradus.schedulefornatcteachers.shared.domain.services.NatkDB
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
-import java.sql.Connection
 import java.sql.DriverManager
 import java.util.*
 import javax.inject.Inject
@@ -22,7 +21,8 @@ import javax.inject.Inject
 class TeachersListViewModel
 @Inject
 constructor(
-    private val natkDB: NatkDB
+    private val natkDB: NatkDB,
+    private val mainNavProvider: IScheduleMainNavProvider
 ) : ViewModel() {
 
     private val _teacherViewState: MutableState<TeachersListViewState>
@@ -34,7 +34,7 @@ constructor(
     val searchBox: State<String>
         get() = _searchBox
 
-    var properties = Properties().apply {
+    private var properties = Properties().apply {
         setProperty("user", natkDB.user)
         setProperty("password", natkDB.password)
         setProperty("useUnicode", "true")
@@ -68,7 +68,7 @@ constructor(
                 _teacherViewState.value = TeachersListViewState.PresentInfo(
                     listTeachers = teachersList,
                     onTeacherClick = {
-                        //TODO
+                        mainNavProvider.navigateToSchedule(formatNavArgumentToNavigate(it))
                     }
                 )
             } catch (ex: Exception) {

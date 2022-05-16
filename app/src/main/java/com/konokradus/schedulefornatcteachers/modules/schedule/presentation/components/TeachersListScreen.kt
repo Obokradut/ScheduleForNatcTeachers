@@ -5,17 +5,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.ScheduleMainViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.TeachersListViewState
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
+@ExperimentalMaterialApi
 @Composable
 fun TeachersListScreen(
+    mainViewModel: ScheduleMainViewModel,
     teachersListViewState: TeachersListViewState,
     searchFio: String,
     searchChanged: (String) -> Unit
@@ -41,22 +45,16 @@ fun TeachersListScreen(
             }
             when (teachersListViewState) {
                 is TeachersListViewState.Loading -> {
-                    item {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .weight(1f),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
-                    }
+
                 }
                 is TeachersListViewState.PresentInfo -> {
                     val count = teachersListViewState.listTeachers.count()
                     teachersListViewState.listTeachers.forEachIndexed { i, person ->
                         item {
-                            TeacherItem(fullName = person)
+                            TeacherItem(
+                                fullName = person,
+                                onClickTeacher = teachersListViewState.onTeacherClick
+                            )
                             if (i != count - 1) {
                                 Divider(
                                     thickness = 2.dp,
@@ -74,13 +72,5 @@ fun TeachersListScreen(
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun Preview(){
-    Box(Modifier.background(Color.White)){
- /*       TeachersListScreen()*/
     }
 }

@@ -1,9 +1,7 @@
 package com.konokradus.schedulefornatcteachers.navigation.schedule
 
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class ScheduleMainNavProvider : IScheduleMainNavProvider {
 
@@ -17,8 +15,8 @@ class ScheduleMainNavProvider : IScheduleMainNavProvider {
         _currentNavFlow.tryEmit(ScheduleMainDestinations.Drawer)
     }
 
-    override fun navigateToSchedule(id: Int) {
-        _currentNavFlow.tryEmit(ScheduleMainDestinations.Schedule(id))
+    override fun navigateToSchedule(fio: String) {
+        _currentNavFlow.tryEmit(ScheduleMainDestinations.Schedule(fio))
     }
 
     override fun popBack() {

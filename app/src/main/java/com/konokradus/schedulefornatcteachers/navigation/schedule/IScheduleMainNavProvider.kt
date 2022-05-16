@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface IScheduleMainNavProvider {
     val currentNavFlow: SharedFlow<ScheduleMainDestinations>
     fun navigateToDrawer()
-    fun navigateToSchedule(id: Int)
+    fun navigateToSchedule(fio: String)
     fun popBack()
 }

@@ -3,10 +3,7 @@ package com.konokradus.schedulefornatcteachers.modules.schedule.presentation.com
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,14 +14,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konokradus.schedulefornatcteachers.R
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.TeachersListViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.LessonItem
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.LessonItemGroup
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.ScheduleDayItemEntity
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.TeacherScheduleViewState
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
 fun TeacherSchedule(
-    fio: String
+    teacherScheduleViewState: TeacherScheduleViewState
 ) {
     Column(
         modifier = Modifier
@@ -51,12 +50,16 @@ fun TeacherSchedule(
                 )
             }
             Spacer(modifier = Modifier.width(60.dp))
-            Text(
-                text = fio,
-                style = ScheduleTheme.typography.title,
-                softWrap = true,
-                textAlign = TextAlign.Center
-            )
+            when(teacherScheduleViewState){
+                is TeacherScheduleViewState.PresentInfo -> {
+                    Text(
+                        text = teacherScheduleViewState.fio,
+                        style = ScheduleTheme.typography.title,
+                        softWrap = true,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
         }
         Spacer(modifier = Modifier.height(20.dp))
         Divider(
@@ -64,115 +67,42 @@ fun TeacherSchedule(
             color = ScheduleTheme.colors.searchBox,
             modifier = Modifier.fillMaxWidth(0.9f)
         )
+
         LazyColumn(){
             item {
                 Spacer(modifier = Modifier.height(40.dp))
             }
-            lessonsList.forEach { lesson ->
-                item{
-                    ScheduleDayItem(date = lesson.date) {
-                        lesson.lessons.forEach{ lessonItem ->
-                            LessonItem(
-                                lesson = lessonItem.lesson,
-                                timeStartEnd = lessonItem.timeStartEnd,
-                                group = lessonItem.group,
-                                auditorium = lessonItem.auditorium
-                            )
+            when(teacherScheduleViewState){
+                is TeacherScheduleViewState.Loading -> {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
                         }
                     }
-                    Spacer(modifier = Modifier.height(50.dp))
+                }
+                is TeacherScheduleViewState.PresentInfo -> {
+                    teacherScheduleViewState.schedule.forEach { lesson ->
+                        item{
+                            ScheduleDayItem(date = lesson.date) {
+                                lesson.lessons.forEach{ lessonItem ->
+                                    LessonItem(
+                                        lesson = lessonItem.lesson,
+                                        timeStartEnd = lessonItem.timeStartEnd,
+                                        group = lessonItem.group,
+                                        auditorium = lessonItem.auditorium
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(50.dp))
+                        }
+                    }
                 }
             }
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    TeacherSchedule("Фамилия Имя Отчество")
-}
-
-
-private val lessonsList = listOf(
-    LessonItemGroup(
-        date = "ПТ — 25.03.2022",
-        listOf(
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            )
-        )
-    ),
-    LessonItemGroup(
-        date = "СБ — 26.03.2022",
-        listOf(
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            )
-        )
-    ),
-    LessonItemGroup(
-        date = "ПТ — 25.03.2022",
-        listOf(
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            )
-        )
-    ),
-    LessonItemGroup(
-        date = "СБ — 26.03.2022",
-        listOf(
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            ),
-            LessonItem(
-                "Мат. моделирование",
-                "8:30-10:10",
-                "ПР-315",
-                "№451"
-            )
-        )
-    )
-)

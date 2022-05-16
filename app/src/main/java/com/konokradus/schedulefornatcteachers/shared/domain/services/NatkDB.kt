@@ -24,7 +24,7 @@ constructor(
             fio: String = "",
             connection: Connection
         ): MutableList<String> {
-            var statement = connection.createStatement()
+            val statement = connection.createStatement()
             var listTeachers = mutableListOf<String>()
             val queryTeacher: String =
                 "SELECT DISTINCT `prepod`" +
@@ -41,15 +41,30 @@ constructor(
 
         fun getTeacherSchedule(
             fio: String,
+            dbDate: String,
             connection: Connection
         ): ResultSet? {
-            var statement = connection.createStatement()
+            val statement = connection.createStatement()
             val queryTeacherSchedule: String =
                 "SELECT `gruppa` , `disciplina` , `auditoria` , `vremya` , `data`" +
                         "FROM `1c_shedule`" +
-                        "WHERE `prepod` LIKE N'%$fio%'" +
+                        "WHERE `prepod` LIKE N'%$fio%' AND `data` LIKE '%$dbDate%'" +
                         "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
             rs = statement?.executeQuery(queryTeacherSchedule)
+            return rs
+        }
+
+        fun getDistinctScheduleData(
+            fio: String,
+            connection: Connection
+        ): ResultSet? {
+            val statement = connection.createStatement()
+            val queryDistinctScheduleData: String =
+                "SELECT DISTINCT `data`" +
+                        "FROM `1c_shedule`" +
+                        "WHERE `prepod` LIKE N'%$fio%'" +
+                        "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
+            rs = statement?.executeQuery(queryDistinctScheduleData)
             return rs
         }
     }

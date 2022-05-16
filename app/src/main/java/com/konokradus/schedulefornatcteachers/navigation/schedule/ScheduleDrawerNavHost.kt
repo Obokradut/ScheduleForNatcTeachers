@@ -1,5 +1,6 @@
 package com.konokradus.schedulefornatcteachers.navigation.schedule
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -7,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.ScheduleDrawerViewModel
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.ScheduleMainViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.TeachersListViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.InfoScreen
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.OfficesScreen
@@ -14,6 +16,7 @@ import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.comp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@ExperimentalMaterialApi
 @Composable
 fun ScheduleDrawerNavHost(
     navHostController: NavHostController,
@@ -39,10 +42,12 @@ fun ScheduleDrawerNavHost(
             route = ScheduleDrawerDestinations.TeachersList.route
         ) {
             val teacherViewModel = hiltViewModel<TeachersListViewModel>()
+            val mainViewModel = hiltViewModel<ScheduleMainViewModel>()
             TeachersListScreen(
                 searchFio = teacherViewModel.searchBox.value,
                 searchChanged = teacherViewModel::searchChanged,
-                teachersListViewState = teacherViewModel.teacherViewState.value
+                teachersListViewState = teacherViewModel.teacherViewState.value,
+                mainViewModel = mainViewModel
             )
         }
         composable(

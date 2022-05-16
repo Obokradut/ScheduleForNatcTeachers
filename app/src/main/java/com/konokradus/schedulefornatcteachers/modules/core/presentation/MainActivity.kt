@@ -28,40 +28,13 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             ScheduleForNatcTeachersTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    /*Box(modifier = Modifier.fillMaxSize()) {
-                        Text(text = Task().x())
-                    }*/
                     ScheduleMainContainer()
                 }
             }
-        }
-    }
-    class Task() : ViewModel() {
-        var records = "213121"
-        init {
-            viewModelScope.launch(Dispatchers.IO){
-                    Class.forName("com.mysql.jdbc.Driver")
-                    val connection = DriverManager.getConnection(
-                        "jdbc:mysql://91.227.68.11:3306/pl4453-mobile",
-                        "sura_dm",
-                        "X5f5D3u8"
-                    )
-                    val statement = connection.createStatement()
-                val resultSet =
-                    statement.executeQuery("SELECT DISTINCT `prepod` FROM `1c_shedule` WHERE 1 ORDER BY `1c_shedule`.`prepod` ASC")
-                while (resultSet.next()) {
-                    records += resultSet.getString("prepod")
-                }
-            }
-        }
-
-        fun x():String {
-            return records
         }
     }
 }
