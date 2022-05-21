@@ -23,41 +23,50 @@ constructor(
         var lessonDate: String
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         var date: Date
+        val regex = "№\\d{3}".toRegex()
         val rs = natkDB.getDistinctScheduleData(
             fio = fio,
             connection = connection
         )
-        while (rs!!.next()) {
-            val lessons = mutableListOf<LessonItem>()
-            rs.getString("data").also { dbDate ->
-                lessonDate = dbDate.dropLast(11)
-                date = formatter.parse(lessonDate)
-                lessonDate = getDayOfWeek(date) + " — " + editDate(lessonDate)
-                var rs2 = natkDB.getTeacherSchedule(
-                    fio = fio,
-                    dbDate = dbDate.dropLast(11),
-                    connection = connection
-                )
-                while (rs2!!.next()){
-                    val lessonItem = LessonItem("","","","")
-                    rs2.getString("disciplina").also { lesson ->
-                        lessonItem.lesson = lesson
+        try {
+            while (rs!!.next()) {
+                val lessons = mutableListOf<LessonItem>()
+                rs.getString("data").also { dbDate ->
+                    lessonDate = dbDate.dropLast(11)
+                    date = formatter.parse(lessonDate)
+                    lessonDate = getDayOfWeek(date) + " — " + editDate(lessonDate)
+                    var rs2 = natkDB.getTeacherSchedule(
+                        fio = fio,
+                        dbDate = dbDate.dropLast(11),
+                        connection = connection
+                    )
+                    while (rs2!!.next()){
+                        val lessonItem = LessonItem("","","","")
+                        rs2.getString("disciplina").also { lesson ->
+                            lessonItem.lesson = lesson
+                        }
+                        rs2.getString("vremya").also { time ->
+                            lessonItem.timeStartEnd = time.replace(";","-")
+                        }
+                        rs2.getString("gruppa").also { group ->
+                            lessonItem.group = group
+                        }
+                        rs2.getString("auditoria").also { auditorium ->
+                            lessonItem.auditorium =
+                                regex.findAll(auditorium).map{it.value}.toList()[0]
+                        }
+                        lessons.add(lessonItem)
                     }
-                    rs2.getString("vremya").also { time ->
-                        lessonItem.timeStartEnd = time.replace(";","-")
-                    }
-                    rs2.getString("gruppa").also { group ->
-                        lessonItem.group = group
-                    }
-                    rs2.getString("auditoria").also { auditorium ->
-                        lessonItem.auditorium = auditorium.subSequence(8,12) as String
-                    }
-                    lessons.add(lessonItem)
+                    oneLessonItemGroup = LessonItemGroup(lessonDate,lessons)
+                    lessonsList.add(oneLessonItemGroup)
                 }
-                oneLessonItemGroup = LessonItemGroup(lessonDate,lessons)
-                lessonsList.add(oneLessonItemGroup)
             }
+            return lessonsList
+        }catch (ex: Exception) {
+            val lessons = mutableListOf<LessonItem>()
+            oneLessonItemGroup = LessonItemGroup("Расписание отсутствует", lessons)
+            lessonsList.add(oneLessonItemGroup)
+            return lessonsList
         }
-        return lessonsList
     }
 }

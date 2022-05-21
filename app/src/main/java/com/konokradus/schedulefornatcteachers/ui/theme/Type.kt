@@ -23,6 +23,7 @@ data class ScheduleTypography(
     val topBarText: TextStyle,
     val menuButtonText: TextStyle,
     val title: TextStyle,
+    val search: TextStyle,
     val titleBold: TextStyle,
     val dateTitle: TextStyle
 )
@@ -57,5 +58,11 @@ val ScheduleTypographyImpl = ScheduleTypography(
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
         letterSpacing = 5.sp
+    ),
+    search = TextStyle(
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
+        letterSpacing = 0.sp
     )
 )

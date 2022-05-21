@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,7 +56,10 @@ fun ScheduleDayItem(
     date: String,
     content: @Composable LessonsGroupScope.() -> Unit
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier.shadow(elevation = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         ScheduleDate(date)
         Spacer(modifier = Modifier.height(15.dp))
         Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {

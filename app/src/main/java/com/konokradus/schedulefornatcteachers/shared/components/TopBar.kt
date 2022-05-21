@@ -12,26 +12,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.TitlesTopBarImp
-import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainDestinations
+import com.konokradus.schedulefornatcteachers.navigation.schedule.drawer.ScheduleDrawerDestinations
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
-fun TopBarSchedule(
+fun TopBar(
     navController: NavController,
-    onPopBackClick: () -> Unit,
-    onAddFavoritesClick: () -> Unit
+    onMenuClick: () -> Unit
 ) {
-    var curEntry = navController.currentBackStackEntryAsState()
-    var title = when (curEntry.value?.destination?.route) {
-        ScheduleMainDestinations.ScheduleTemplate.route -> TitlesTopBarImp.schedule
+    val curEntry = navController.currentBackStackEntryAsState()
+    val title = when(curEntry.value?.destination?.route) {
+        ScheduleDrawerDestinations.TeachersList.route -> TitlesTopBarImp.teachersList
+        ScheduleDrawerDestinations.Favorites.route -> TitlesTopBarImp.favorites
+        ScheduleDrawerDestinations.Offices.route -> TitlesTopBarImp.offices
+        ScheduleDrawerDestinations.Info.route -> TitlesTopBarImp.info
         else -> ""
     }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -43,20 +47,20 @@ fun TopBarSchedule(
         ),
         elevation = 40.dp
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Spacer(modifier = Modifier.width(5.dp))
-            IconButton(onClick = onPopBackClick) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(modifier = Modifier.width(10.dp))
+            IconButton(onClick = onMenuClick) {
                 Icon(
                     modifier = Modifier.size(40.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
-                    contentDescription = "ic_back",
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_menu),
+                    contentDescription = "ic_menu",
                     tint = ScheduleTheme.colors.layoutBackground
                 )
             }
+
+            Spacer(modifier = Modifier.width(5.dp))
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 text = title,
                 style = ScheduleTheme.typography.topBarText,
                 textAlign = TextAlign.Center,
@@ -64,15 +68,6 @@ fun TopBarSchedule(
                 fontSize = 20.sp,
                 softWrap = true
             )
-            IconButton(onClick = onAddFavoritesClick) {
-                Icon(
-                    modifier = Modifier.size(40.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_unfavorites),
-                    contentDescription = "ic_unfavorites",
-                    tint = ScheduleTheme.colors.layoutBackground
-                )
-            }
-            Spacer(modifier = Modifier.width(5.dp))
         }
     }
 }

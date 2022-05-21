@@ -15,6 +15,6 @@ fun getDayOfWeek (date: Date): String {
         5 -> "ПТ"
         6 -> "СБ"
         7 -> "ВС"
-        else -> "BRUH"
+        else -> "NULL"
     }
 }

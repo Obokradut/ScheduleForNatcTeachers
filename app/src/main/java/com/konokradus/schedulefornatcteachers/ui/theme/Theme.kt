@@ -26,11 +26,12 @@ private val LightColorPalette = ScheduleColors(
     ultimateTitle = DarkGrayTitle,
     darkTopBar = DarkTopBar,
     menuBackground = MenuBackground,
-    menuButton = MenuButton
+    menuButton = MenuButton,
+    searchIcon = SearchIcon
 )
 
 @Composable
-fun ScheduleForNatcTeachersTheme(
+fun ScheduleForNatkTeachersTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

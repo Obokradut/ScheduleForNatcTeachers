@@ -7,9 +7,10 @@ import androidx.compose.ui.graphics.Color
 val White = Color(0xffFFFFFF)
 val TopBar = Color(0xff2D73BC)
 val DarkTopBar = Color(0xff235487)
-val MenuBackground = Color(0xff4E4E4E)
-val MenuButton = Color(0xff878787)
+val MenuBackground = Color(0xff424B56)
+val MenuButton = Color(0xff5F7B9B)
 val DateBar = Color(0xff0078BF)
+val SearchIcon = Color(0xffB9B9B9)
 val GrayUltimate = Color(0xFFCFCFCF)
 val LightGrayUltimate = Color(0xffEDEDED)
 val DarkGrayTitle = Color(0xff6C6C6C)
@@ -24,6 +25,7 @@ data class ScheduleColors(
     val searchBox: Color,
     val border: Color,
     val photoBox: Color,
+    val searchIcon: Color,
     val dateBox: Color,
     val ultimateTitle: Color
 )

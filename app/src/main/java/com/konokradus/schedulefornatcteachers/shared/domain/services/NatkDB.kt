@@ -20,52 +20,52 @@ constructor(
 
     var rs: ResultSet? = null
 
-        fun getTeachers(
-            fio: String = "",
-            connection: Connection
-        ): MutableList<String> {
-            val statement = connection.createStatement()
-            var listTeachers = mutableListOf<String>()
-            val queryTeacher: String =
-                "SELECT DISTINCT `prepod`" +
-                        "FROM `1c_shedule`" +
-                        "WHERE `prepod` LIKE N'%$fio%'" +
-                        "ORDER BY `1c_shedule`.`prepod`  ASC"
-            rs = statement?.executeQuery(queryTeacher)
-            while (rs!!.next()) {
-                if (rs?.getString("prepod") != "")
-                    rs?.getString("prepod")?.let { listTeachers.add(it) }
-            }
-            return listTeachers
+    fun getTeachers(
+        fio: String = "",
+        connection: Connection
+    ): MutableList<String> {
+        val statement = connection.createStatement()
+        val listTeachers = mutableListOf<String>()
+        val queryTeacher: String =
+            "SELECT DISTINCT `prepod`" +
+                    "FROM `1c_shedule`" +
+                    "WHERE `prepod` LIKE N'%$fio%'" +
+                    "ORDER BY `1c_shedule`.`prepod`  ASC"
+        rs = statement?.executeQuery(queryTeacher)
+        while (rs!!.next()) {
+            if (rs?.getString("prepod") != "")
+                rs?.getString("prepod")?.let { listTeachers.add(it) }
         }
-
-        fun getTeacherSchedule(
-            fio: String,
-            dbDate: String,
-            connection: Connection
-        ): ResultSet? {
-            val statement = connection.createStatement()
-            val queryTeacherSchedule: String =
-                "SELECT `gruppa` , `disciplina` , `auditoria` , `vremya` , `data`" +
-                        "FROM `1c_shedule`" +
-                        "WHERE `prepod` LIKE N'%$fio%' AND `data` LIKE '%$dbDate%'" +
-                        "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
-            rs = statement?.executeQuery(queryTeacherSchedule)
-            return rs
-        }
-
-        fun getDistinctScheduleData(
-            fio: String,
-            connection: Connection
-        ): ResultSet? {
-            val statement = connection.createStatement()
-            val queryDistinctScheduleData: String =
-                "SELECT DISTINCT `data`" +
-                        "FROM `1c_shedule`" +
-                        "WHERE `prepod` LIKE N'%$fio%'" +
-                        "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
-            rs = statement?.executeQuery(queryDistinctScheduleData)
-            return rs
-        }
+        return listTeachers
     }
+
+    fun getTeacherSchedule(
+        fio: String,
+        dbDate: String,
+        connection: Connection
+    ): ResultSet? {
+        val statement = connection.createStatement()
+        val queryTeacherSchedule: String =
+            "SELECT `gruppa` , `disciplina` , `auditoria` , `vremya` , `data`" +
+                    "FROM `1c_shedule`" +
+                    "WHERE `prepod` LIKE N'%$fio%' AND `data` LIKE '%$dbDate%'" +
+                    "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
+        rs = statement?.executeQuery(queryTeacherSchedule)
+        return rs
+    }
+
+    fun getDistinctScheduleData(
+        fio: String,
+        connection: Connection
+    ): ResultSet? {
+        val statement = connection.createStatement()
+        val queryDistinctScheduleData: String =
+            "SELECT DISTINCT `data`" +
+                    "FROM `1c_shedule`" +
+                    "WHERE `prepod` LIKE N'%$fio%'" +
+                    "ORDER BY `1c_shedule`.`data` ASC , `vremya` ASC"
+        rs = statement?.executeQuery(queryDistinctScheduleData)
+        return rs
+    }
+}
 
