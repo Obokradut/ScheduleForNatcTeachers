@@ -61,9 +61,10 @@ fun ScheduleMainNavHost(
             Scaffold(
                 topBar = {
                     TopBarSchedule(
+                        fio = fio,
                         navController = navHostController,
                         onPopBackClick = { navHostController.popBackStack() },
-                        onAddFavoritesClick = {}
+                        scheduleViewState = scheduleViewModel.scheduleViewState.value
                     )
                 }
             ) {

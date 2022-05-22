@@ -23,7 +23,6 @@ constructor(
         var lessonDate: String
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         var date: Date
-        val regex = "№\\d{3}".toRegex()
         val rs = natkDB.getDistinctScheduleData(
             fio = fio,
             connection = connection
@@ -33,9 +32,9 @@ constructor(
                 val lessons = mutableListOf<LessonItem>()
                 rs.getString("data").also { dbDate ->
                     lessonDate = dbDate.dropLast(11)
-                    date = formatter.parse(lessonDate)
+                    date = formatter.parse(lessonDate) as Date
                     lessonDate = getDayOfWeek(date) + " — " + editDate(lessonDate)
-                    var rs2 = natkDB.getTeacherSchedule(
+                    val rs2 = natkDB.getTeacherSchedule(
                         fio = fio,
                         dbDate = dbDate.dropLast(11),
                         connection = connection
@@ -52,8 +51,7 @@ constructor(
                             lessonItem.group = group
                         }
                         rs2.getString("auditoria").also { auditorium ->
-                            lessonItem.auditorium =
-                                regex.findAll(auditorium).map{it.value}.toList()[0]
+                            lessonItem.auditorium = getAuditorium(auditorium)
                         }
                         lessons.add(lessonItem)
                     }

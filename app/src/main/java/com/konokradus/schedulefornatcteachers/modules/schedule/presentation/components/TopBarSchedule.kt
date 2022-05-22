@@ -18,17 +18,20 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.TitlesTopBarImp
+import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.TeacherScheduleViewModel
+import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.TeacherScheduleViewState
 import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainDestinations
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 @Composable
 fun TopBarSchedule(
+    fio: String,
     navController: NavController,
+    scheduleViewState: TeacherScheduleViewState,
     onPopBackClick: () -> Unit,
-    onAddFavoritesClick: () -> Unit
 ) {
-    var curEntry = navController.currentBackStackEntryAsState()
-    var title = when (curEntry.value?.destination?.route) {
+    val curEntry = navController.currentBackStackEntryAsState()
+    val title = when (curEntry.value?.destination?.route) {
         ScheduleMainDestinations.ScheduleTemplate.route -> TitlesTopBarImp.schedule
         else -> ""
     }
@@ -64,14 +67,41 @@ fun TopBarSchedule(
                 fontSize = 20.sp,
                 softWrap = true
             )
-            IconButton(onClick = onAddFavoritesClick) {
-                Icon(
-                    modifier = Modifier.size(40.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_unfavorites),
-                    contentDescription = "ic_unfavorites",
-                    tint = ScheduleTheme.colors.layoutBackground
-                )
+            when(scheduleViewState){
+                is TeacherScheduleViewState.PresentInfo -> {
+                    if (scheduleViewState.isFavorite){
+                        IconButton(
+                            onClick = {
+                                scheduleViewState.onRemoveFavoriteClick()
+                            }
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(40.dp),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_favorites),
+                                contentDescription = "ic_favorites",
+                                tint = ScheduleTheme.colors.layoutBackground
+                            )
+                        }
+                    }
+                    else {
+                        IconButton(
+                            onClick = {
+                                scheduleViewState.onAddFavoriteClick(fio)
+                            }
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(40.dp),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_unfavorites),
+                                contentDescription = "ic_unfavorites",
+                                tint = ScheduleTheme.colors.layoutBackground
+                            )
+                        }
+                    }
+
+                }
+                else -> {}
             }
+
             Spacer(modifier = Modifier.width(5.dp))
         }
     }

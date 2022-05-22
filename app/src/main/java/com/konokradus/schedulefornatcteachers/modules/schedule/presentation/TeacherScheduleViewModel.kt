@@ -6,9 +6,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.GetLessonItemGroup
-import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.formatNavArgumentFromNavigate
+import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.*
 import com.konokradus.schedulefornatcteachers.shared.domain.services.NatkDB
+import com.konokradus.schedulefornatcteachers.shared.domain.services.teachersstorage.TeachersStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +22,10 @@ class TeacherScheduleViewModel
 @Inject
 constructor(
     private val natkDB: NatkDB,
-    private val getLessonItemGroup: GetLessonItemGroup
+    private val getLessonItemGroup: GetLessonItemGroup,
+    private val addTeacherInStorage: AddTeacherInStorageUseCase,
+    private val isTeacherExist: IsTeacherExistUseCase,
+    private val removeTeacherFromStorage: RemoveTeacherFromStorageUseCase
 ) : ViewModel() {
     private val _scheduleViewState: MutableState<TeacherScheduleViewState>
         = mutableStateOf(TeacherScheduleViewState.Loading)
@@ -34,6 +37,13 @@ constructor(
         setProperty("password", natkDB.password)
         setProperty("useUnicode", "true")
         setProperty("characterEncoding", "utf-8")
+    }
+
+    private fun addFavorite(fio: String){
+        addTeacherInStorage(fio)
+    }
+    private fun removeFavorite(fio: String){
+        removeTeacherFromStorage(fio)
     }
 
     fun loadInfo(fio: String) {
@@ -53,7 +63,15 @@ constructor(
                 if (schedule[1].date != ""){
                     _scheduleViewState.value = TeacherScheduleViewState.PresentInfo(
                         fio = formatNavArgumentFromNavigate(fio),
-                        schedule = schedule
+                        schedule = schedule,
+                        isFavorite = isTeacherExist(formatNavArgumentFromNavigate(fio))
+                        /*teachersStorage.isTeacherInStorage(formatNavArgumentFromNavigate(fio))*/,
+                        onAddFavoriteClick = {
+                            addFavorite(formatNavArgumentFromNavigate(fio))
+                        },
+                        onRemoveFavoriteClick = {
+                            removeFavorite(formatNavArgumentFromNavigate(fio))
+                        }
                     )
                 } else {
                     _scheduleViewState.value = TeacherScheduleViewState.Error(

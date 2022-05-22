@@ -6,7 +6,10 @@ sealed interface TeacherScheduleViewState {
     object Loading: TeacherScheduleViewState
     data class PresentInfo(
         val fio: String,
-        val schedule: List<LessonItemGroup>
+        val schedule: List<LessonItemGroup>,
+        val isFavorite: Boolean,
+        val onAddFavoriteClick: (String) -> Unit,
+        val onRemoveFavoriteClick: () -> Unit
     ) : TeacherScheduleViewState
     data class Error(
         val fio: String,
