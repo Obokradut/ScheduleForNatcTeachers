@@ -12,33 +12,15 @@ class TeachersStorage
 constructor(
     appContext: Context,
 ) : ITeachersStorage {
-    private var _teachersStorage: SharedPreferences =
+    private val _teachersStorage: SharedPreferences =
         appContext.getSharedPreferences(TEACHER_PREFERENCE, MODE_PRIVATE)
 
-    override var teachersFio: String = ""
-        get() = _teachersStorage.getString(TEACHER_FIO, "") ?: ""
+    override var teachersFio: MutableSet<String>
+        get() = _teachersStorage.getStringSet(TEACHER_FIO, mutableSetOf()) ?: mutableSetOf()
         set(value) {
-            field = value
-            _teachersStorage.edit().putString(TEACHER_FIO, value).apply()
+            _teachersStorage.edit().putStringSet(TEACHER_FIO, value).apply()
         }
 
-    override val isTeacherExist: Boolean
-        get() = false //TODO
-
-
-    var log = teachersFio
-    var allPreferences: Map<String, *> = _teachersStorage.getAll()
-    var i = 1
-
-    /*fun isTeacherInStorage (fio: String): Boolean {
-        return teachersStorage.getString(TEACHER_FIO , fio) != null
-    }
-
-    fun addTeacherInStorage (fio: String) {
-        teachersStorage.edit().putString(TEACHER_FIO,fio).apply()
-    }
-
-    fun removeTeacherFromStorage () {
-        teachersStorage.edit().putString(TEACHER_FIO,"").apply()
-    }*/
+    var f = teachersFio.toList()
+    var fq = teachersFio.toList()
 }

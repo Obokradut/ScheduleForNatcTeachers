@@ -2,9 +2,11 @@ package com.konokradus.schedulefornatcteachers.modules.favorite.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.SearchBox
@@ -39,9 +41,17 @@ fun FavoriteScreen(
             }
             when (favoriteViewState) {
                 is FavoriteViewState.Loading -> {
-
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
-
                 is FavoriteViewState.PresentInfo -> {
                     val count = favoriteViewState.listFavoriteTeachers.count()
                     favoriteViewState.listFavoriteTeachers.forEachIndexed { i, person ->

@@ -10,6 +10,7 @@ constructor(
     private val teachersStorage: ITeachersStorage
 ) {
     operator fun invoke(fio: String): Boolean {
-        return teachersStorage.isTeacherExist
+        val teacherStorageList = teachersStorage.teachersFio
+        return teacherStorageList.toMutableList().firstOrNull { it == fio } != null
     }
 }

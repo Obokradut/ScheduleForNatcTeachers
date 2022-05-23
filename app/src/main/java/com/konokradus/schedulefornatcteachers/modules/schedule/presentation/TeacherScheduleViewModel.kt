@@ -1,6 +1,8 @@
 package com.konokradus.schedulefornatcteachers.modules.schedule.presentation
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -64,13 +66,14 @@ constructor(
                     _scheduleViewState.value = TeacherScheduleViewState.PresentInfo(
                         fio = formatNavArgumentFromNavigate(fio),
                         schedule = schedule,
-                        isFavorite = isTeacherExist(formatNavArgumentFromNavigate(fio))
-                        /*teachersStorage.isTeacherInStorage(formatNavArgumentFromNavigate(fio))*/,
+                        isFavorite = isTeacherExist(formatNavArgumentFromNavigate(fio)),
                         onAddFavoriteClick = {
                             addFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
                         },
                         onRemoveFavoriteClick = {
                             removeFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
                         }
                     )
                 } else {

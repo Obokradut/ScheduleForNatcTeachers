@@ -7,6 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.konokradus.schedulefornatcteachers.modules.favorite.presentation.FavoriteScreen
+import com.konokradus.schedulefornatcteachers.modules.favorite.presentation.FavoriteViewModel
 import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainViewModel
 import com.konokradus.schedulefornatcteachers.modules.teacherslist.presentation.TeachersListViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.InfoScreen
@@ -50,7 +52,12 @@ fun ScheduleDrawerNavHost(
         composable(
             route = ScheduleDrawerDestinations.Favorites.route
         ) {
-            //TODO
+            val favoriteViewModel = hiltViewModel<FavoriteViewModel>()
+            FavoriteScreen(
+                searchFio = favoriteViewModel.searchBox.value,
+                searchChanged = favoriteViewModel::searchChanged,
+                favoriteViewState = favoriteViewModel.favoriteViewState.value
+            )
         }
         composable(
             route = ScheduleDrawerDestinations.Offices.route

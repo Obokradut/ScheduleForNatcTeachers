@@ -2,9 +2,11 @@ package com.konokradus.schedulefornatcteachers.modules.schedule.presentation.com
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainViewModel
@@ -39,7 +41,16 @@ fun TeachersListScreen(
             }
             when (teachersListViewState) {
                 is TeachersListViewState.Loading -> {
-
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
                 is TeachersListViewState.PresentInfo -> {
                     val count = teachersListViewState.listTeachers.count()
