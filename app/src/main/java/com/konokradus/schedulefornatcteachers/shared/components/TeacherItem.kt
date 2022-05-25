@@ -24,28 +24,38 @@ fun TeacherItem(
     onClickTeacher: (String) -> Unit,
     fullName: String
 ){
-    Row(
-        modifier = Modifier.clickable {
-            onClickTeacher(fullName)
-        }
-    ) {
-        Surface(
-            modifier = Modifier.size(60.dp),
-            color = ScheduleTheme.colors.searchBox,
-            shape = RoundedCornerShape(6.dp)
+    Box(modifier = Modifier.clickable {
+        onClickTeacher(fullName)
+    }){
+        Row(
+            modifier = Modifier
+                .padding(
+                    start = 0.dp,
+                    top = 20.dp,
+                    end = 0.dp,
+                    bottom = 20.dp
+                )
+
         ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_person),
-                contentDescription = "person",
-                modifier = Modifier.fillMaxSize().padding(10.dp),
-                tint = ScheduleTheme.colors.layoutBackground
+            Surface(
+                modifier = Modifier.size(60.dp),
+                color = ScheduleTheme.colors.searchBox,
+                shape = RoundedCornerShape(6.dp)
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_person),
+                    contentDescription = "person",
+                    modifier = Modifier.fillMaxSize().padding(10.dp),
+                    tint = ScheduleTheme.colors.layoutBackground
+                )
+            }
+            Spacer(modifier = Modifier.width(20.dp))
+            Text(
+                text = fullName,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                style = ScheduleTheme.typography.title.copy(textAlign = TextAlign.Left)
             )
         }
-        Spacer(modifier = Modifier.width(20.dp))
-        Text(
-            text = fullName,
-            modifier = Modifier.align(Alignment.CenterVertically),
-            style = ScheduleTheme.typography.title.copy(textAlign = TextAlign.Left)
-        )
     }
+
 }

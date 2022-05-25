@@ -5,6 +5,7 @@ fun getAuditorium(auditorium: String):String {
     return when {
         auditorium.contains("Спортивный зал",true) -> "—"
         auditorium.contains("Дистанционные технологии",true) -> "—"
+        //TODO Сделать отмену
         else -> regex.findAll(auditorium).map{it.value}.toList()[0]
     }
 }
