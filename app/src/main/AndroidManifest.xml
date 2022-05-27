@@ -3,6 +3,8 @@
     package="com.konokradus.schedulefornatcteachers">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--  TODO Запредить переворачивать экран  -->
+
     <application
         android:name=".ScheduleApp"
         android:allowBackup="true"

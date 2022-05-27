@@ -28,6 +28,9 @@ data class ScheduleTypography(
     val dateTitle: TextStyle
 )
 
+val defaultTextFontSize = 24.dp
+//TODO Сделать общий размер текста. Уменьшить размер текста
+
 val ScheduleTypographyImpl = ScheduleTypography(
     topBarText = TextStyle(
         fontFamily = Roboto,
