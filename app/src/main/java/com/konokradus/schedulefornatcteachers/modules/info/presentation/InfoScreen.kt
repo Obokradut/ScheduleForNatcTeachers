@@ -1,20 +1,17 @@
 package com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components
 
-import android.widget.Space
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.konokradus.schedulefornatcteachers.BuildConfig
 import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.modules.info.presentation.components.InfoBox
 import com.konokradus.schedulefornatcteachers.modules.info.presentation.components.Line
@@ -46,7 +43,7 @@ fun InfoScreen() {
                     icon = ImageVector.vectorResource(id = R.drawable.ic_version),
                     contentDescription = "version",
                     title = "Версия",
-                    text = "v.1.0" //TODO Сделать взятие данных из версии приложения
+                    text = BuildConfig.VERSION_NAME
                 )
                 Line(up = 10, down = 10)
                 InfoBox(

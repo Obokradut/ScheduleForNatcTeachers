@@ -1,8 +1,6 @@
 package com.konokradus.schedulefornatcteachers.modules.schedule.presentation
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -10,11 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.*
 import com.konokradus.schedulefornatcteachers.shared.domain.services.NatkDB
-import com.konokradus.schedulefornatcteachers.shared.domain.services.teachersstorage.TeachersStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.sql.DriverManager
 import java.util.*
 import javax.inject.Inject
@@ -49,7 +45,7 @@ constructor(
     }
 
     fun loadInfo(fio: String) {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val connection = DriverManager.getConnection(
@@ -60,9 +56,9 @@ constructor(
                     fio = formatNavArgumentFromNavigate(fio),
                     connection = connection
                 )
-                Log.d("1",formatNavArgumentFromNavigate(fio))
                 _scheduleViewState.value = TeacherScheduleViewState.Loading
-                if (schedule[1].date != ""){
+
+                if (schedule[1].date != "") {
                     _scheduleViewState.value = TeacherScheduleViewState.PresentInfo(
                         fio = formatNavArgumentFromNavigate(fio),
                         schedule = schedule,
@@ -79,13 +75,32 @@ constructor(
                 } else {
                     _scheduleViewState.value = TeacherScheduleViewState.Error(
                         fio = formatNavArgumentFromNavigate(fio),
-                        message = "Расписание отсуствует")
+                        message = "Расписание отсуствует",
+                        isFavorite = isTeacherExist(formatNavArgumentFromNavigate(fio)),
+                        onAddFavoriteClick = {
+                            addFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
+                        },
+                        onRemoveFavoriteClick = {
+                            removeFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
+                        }
+                    )
                 }
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 _scheduleViewState.value =
                     TeacherScheduleViewState.Error(
                         fio = formatNavArgumentFromNavigate(fio),
-                        message = "Расписание отсуствует"
+                        message = "Расписание отсуствует",
+                        isFavorite = isTeacherExist(formatNavArgumentFromNavigate(fio)),
+                        onAddFavoriteClick = {
+                            addFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
+                        },
+                        onRemoveFavoriteClick = {
+                            removeFavorite(formatNavArgumentFromNavigate(fio))
+                            loadInfo(fio)
+                        }
                     )
             }
         }

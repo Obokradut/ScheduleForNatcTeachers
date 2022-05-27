@@ -37,7 +37,7 @@ fun FavoriteScreen(
             )
         ) {
             item {
-                Spacer(modifier = Modifier.padding(top = 40.dp))
+                Spacer(modifier = Modifier.padding(top = 20.dp))
             }
             when (favoriteViewState) {
                 is FavoriteViewState.Loading -> {
@@ -48,7 +48,7 @@ fun FavoriteScreen(
                                 .weight(1f),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator()
+                            CircularProgressIndicator(color = ScheduleTheme.colors.topBar)
                         }
                     }
                 }
@@ -63,13 +63,7 @@ fun FavoriteScreen(
                             if (i != count - 1) {
                                 Divider(
                                     thickness = 2.dp,
-                                    color = ScheduleTheme.colors.searchBox,
-                                    modifier = Modifier.padding(
-                                        start = 0.dp,
-                                        top = 20.dp,
-                                        end = 0.dp,
-                                        bottom = 20.dp
-                                    )
+                                    color = ScheduleTheme.colors.searchBox
                                 )
                             }
                         }

@@ -11,12 +11,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.konokradus.schedulefornatcteachers.navigation.schedule.drawer.ScheduleDrawerViewModel
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.TeacherScheduleViewModel
-
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.ScheduleDrawerContainer
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.TeacherSchedule
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.TopBarSchedule
+import com.konokradus.schedulefornatcteachers.navigation.schedule.drawer.ScheduleDrawerViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -61,8 +60,6 @@ fun ScheduleMainNavHost(
             Scaffold(
                 topBar = {
                     TopBarSchedule(
-                        fio = fio,
-                        navController = navHostController,
                         onPopBackClick = { navHostController.popBackStack() },
                         scheduleViewState = scheduleViewModel.scheduleViewState.value
                     )

@@ -3,7 +3,6 @@ package com.konokradus.schedulefornatcteachers.shared.domain.services.teachersst
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.util.Log
 
 private const val TEACHER_PREFERENCE = "teacher_preference"
 private const val TEACHER_FIO = "teacher_fio"
@@ -20,7 +19,4 @@ constructor(
         set(value) {
             _teachersStorage.edit().putStringSet(TEACHER_FIO, value).apply()
         }
-
-    var f = teachersFio.toList()
-    var fq = teachersFio.toList()
 }

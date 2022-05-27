@@ -1,9 +1,6 @@
 package com.konokradus.schedulefornatcteachers.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -18,16 +15,29 @@ private val LocalScheduleTypography = staticCompositionLocalOf {
 
 private val LightColorPalette = ScheduleColors(
     topBar = TopBar,
-    layoutBackground = White,
+    layoutBackground = LightBackground,
     searchBox = LightGrayUltimate,
     border = GrayUltimate,
     photoBox = GrayUltimate,
     dateBox = DateBar,
-    ultimateTitle = DarkGrayTitle,
-    darkTopBar = DarkTopBar,
+    ultimateTitle = LightDarkGrayTitle,
+    darkTopBar = MenuTopBar,
     menuBackground = MenuBackground,
     menuButton = MenuButton,
     searchIcon = SearchIcon
+)
+private val DarkColorPalette = ScheduleColors(
+    topBar = DarkTopBar,
+    layoutBackground = DarkBackground,
+    searchBox = DarkLightGrayUltimate,
+    border = DarkGrayUltimate,
+    photoBox = DarkGrayUltimate,
+    dateBox = DarkDateBar,
+    ultimateTitle = DarkDarkGrayTitle,
+    darkTopBar = DarkMenuTopBar,
+    menuBackground = DarkMenuBackground,
+    menuButton = DarkMenuButton,
+    searchIcon = DarkSearchIcon
 )
 
 @Composable
@@ -35,12 +45,12 @@ fun ScheduleForNatkTeachersTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = LightColorPalette
     val typography = ScheduleTypographyImpl
+    val colors = LightColorPalette
     /*val colors = if (darkTheme) {
         LightColorPalette
     } else {
-
+        DarkColorPalette
     }*/
     CompositionLocalProvider(
         LocalScheduleColors provides colors,

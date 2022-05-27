@@ -1,9 +1,5 @@
 package com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import java.time.DayOfWeek
-import java.time.LocalDate
 import java.util.*
 
 fun getDayOfWeek (date: Date): String {

@@ -31,7 +31,7 @@ fun TeacherSchedule(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             Surface(
-                modifier = Modifier.size(130.dp),
+                modifier = Modifier.size(100.dp),
                 color = ScheduleTheme.colors.photoBox,
                 shape = RoundedCornerShape(6.dp),
             ) {
@@ -46,6 +46,15 @@ fun TeacherSchedule(
             }
             Spacer(modifier = Modifier.width(20.dp))
             when(teacherScheduleViewState){
+                is TeacherScheduleViewState.Loading -> {
+                    Text(
+                        text = "████████\n████████",
+                        color = ScheduleTheme.colors.photoBox,
+                        style = ScheduleTheme.typography.title,
+                        textAlign = TextAlign.Center,
+                        softWrap = true
+                    )
+                }
                 is TeacherScheduleViewState.PresentInfo -> {
                     Text(
                         text = teacherScheduleViewState.fio,
@@ -59,10 +68,8 @@ fun TeacherSchedule(
                         text = teacherScheduleViewState.fio,
                         style = ScheduleTheme.typography.title,
                         textAlign = TextAlign.Center,
-
                     )
                 }
-                else -> {}
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -71,7 +78,6 @@ fun TeacherSchedule(
             color = ScheduleTheme.colors.searchBox,
             modifier = Modifier.fillMaxWidth(0.9f)
         )
-
         LazyColumn(){
             item {
                 Spacer(modifier = Modifier.height(40.dp))
@@ -85,7 +91,7 @@ fun TeacherSchedule(
                                 .weight(1f),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator()
+                            CircularProgressIndicator(color = ScheduleTheme.colors.topBar)
                         }
                     }
                 }

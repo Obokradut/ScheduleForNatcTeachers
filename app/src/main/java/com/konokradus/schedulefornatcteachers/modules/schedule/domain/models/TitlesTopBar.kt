@@ -6,7 +6,7 @@ data class TitlesTopBar(
     val schedule: String,
     val offices: String,
     val menu: String,
-    val options: String,
+    val settings: String,
     val info: String,
 )
 
@@ -16,6 +16,6 @@ val TitlesTopBarImp = TitlesTopBar(
     schedule = "РАСПИСАНИЕ",
     offices = "КАБИНЕТЫ",
     menu = "МЕНЮ",
-    options = "НАСТРОЙКИ",
+    settings = "НАСТРОЙКИ",
     info = "ИНФОРМАЦИЯ",
 )

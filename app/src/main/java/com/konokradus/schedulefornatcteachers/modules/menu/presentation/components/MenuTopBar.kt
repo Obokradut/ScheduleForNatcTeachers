@@ -42,15 +42,16 @@ fun MenuTopBar() {
                 contentDescription = "ic_calendar",
                 tint = ScheduleTheme.colors.layoutBackground
             )
-            Spacer(modifier = Modifier.width(70.dp))
-            Text(
-                text = "МЕНЮ",
-                style = ScheduleTheme.typography.topBarText,
-                textAlign = TextAlign.Center,
-                color = ScheduleTheme.colors.layoutBackground,
-                fontSize = 20.sp,
-                softWrap = true
-            )
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
+                Text(
+                    text = "МЕНЮ",
+                    style = ScheduleTheme.typography.topBarText,
+                    textAlign = TextAlign.Center,
+                    color = ScheduleTheme.colors.layoutBackground,
+                    fontSize = 20.sp,
+                    softWrap = true
+                )
+            }
         }
     }
 }

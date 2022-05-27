@@ -1,22 +1,17 @@
 package com.konokradus.schedulefornatcteachers.modules.favorite.presentation
 
-import android.content.SharedPreferences
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.GetAllTeachersFromStorageUseCase
-import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.GetLessonItemGroup
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.SearchFavoriteTeachersUseCase
 import com.konokradus.schedulefornatcteachers.modules.schedule.domain.usecases.formatNavArgumentToNavigate
-import com.konokradus.schedulefornatcteachers.modules.teacherslist.presentation.TeachersListViewState
 import com.konokradus.schedulefornatcteachers.navigation.schedule.main.IScheduleMainNavProvider
 import com.konokradus.schedulefornatcteachers.shared.domain.services.NatkDB
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.sql.DriverManager
 import java.util.*
 import javax.inject.Inject

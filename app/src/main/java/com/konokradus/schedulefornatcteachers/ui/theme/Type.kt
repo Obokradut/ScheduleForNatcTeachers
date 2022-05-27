@@ -1,15 +1,12 @@
 package com.konokradus.schedulefornatcteachers.ui.theme
 
-import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.konokradus.schedulefornatcteachers.R
-import org.w3c.dom.Text
 import javax.annotation.concurrent.Immutable
 
 val Roboto = FontFamily(
@@ -28,20 +25,19 @@ data class ScheduleTypography(
     val dateTitle: TextStyle
 )
 
-val defaultTextFontSize = 24.dp
-//TODO Сделать общий размер текста. Уменьшить размер текста
+private const val defaultTextFontSize = 20
 
 val ScheduleTypographyImpl = ScheduleTypography(
     topBarText = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
+        fontSize = defaultTextFontSize.sp,
         letterSpacing = 10.sp
     ),
     menuButtonText = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Black,
-        fontSize = 24.sp,
+        fontSize = defaultTextFontSize.sp,
         letterSpacing = 2.sp,
         lineHeight = 0.9.em
     ),
@@ -54,12 +50,12 @@ val ScheduleTypographyImpl = ScheduleTypography(
     titleBold = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = defaultTextFontSize.sp
     ),
     dateTitle = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
+        fontSize = defaultTextFontSize.sp,
         letterSpacing = 5.sp
     ),
     search = TextStyle(

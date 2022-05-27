@@ -1,10 +1,7 @@
 package com.konokradus.schedulefornatcteachers.shared.domain.services
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.sql.*
+import java.sql.Connection
+import java.sql.ResultSet
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -46,7 +46,7 @@ fun NavButton(
                     style = ScheduleTheme.typography.menuButtonText,
                     textAlign = TextAlign.Left,
                     color = ScheduleTheme.colors.layoutBackground,
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     softWrap = true
                 )
             }

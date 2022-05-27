@@ -1,6 +1,8 @@
 package com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -10,7 +12,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.konokradus.schedulefornatcteachers.R
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTypographyImpl

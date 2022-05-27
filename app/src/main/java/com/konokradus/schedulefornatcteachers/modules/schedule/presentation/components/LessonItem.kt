@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,10 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.konokradus.schedulefornatcteachers.modules.schedule.domain.models.LessonItem
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
 interface LessonsGroupScope{
@@ -47,25 +44,20 @@ interface LessonsGroupScope{
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .fillMaxHeight()
                         .border(width = 2.dp, color = ScheduleTheme.colors.border),
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Surface(
-                        modifier = Modifier.width(140.dp)
+                        modifier = Modifier.weight(0.35f)
                     ) {
                         ScheduleText(text = timeStartEnd)
                     }
-                    Surface(
-                        border = BorderStroke(
-                            width = 2.dp,
-                            color = ScheduleTheme.colors.border
-                        ),
-                        modifier = Modifier.width(135.dp)
-                    ) {
+                    Surface(modifier = Modifier.weight(0.35f)) {
                         ScheduleText(text = group)
                     }
                     Surface(
-                        modifier = Modifier.width(95.dp)
+                        modifier = Modifier.weight(0.2f)
                     ) {
                         ScheduleText(text = auditorium)
                     }
@@ -82,10 +74,20 @@ private fun ScheduleText(
     text:String,
     fontSize: Int = 20
 ) {
-    Text(
-        text = text, textAlign = TextAlign.Center, fontSize = fontSize.sp,
-        style = ScheduleTheme.typography.titleBold,
-        color = ScheduleTheme.colors.ultimateTitle,
-        modifier = Modifier.padding(5.dp,10.dp,5.dp,10.dp)
-    )
+    Surface(
+        border = BorderStroke(
+            width = 1.dp,
+            color = ScheduleTheme.colors.border
+        )
+    ) {
+        Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
+            Text(
+                text = text, textAlign = TextAlign.Center, fontSize = fontSize.sp,
+                style = ScheduleTheme.typography.titleBold,
+                color = ScheduleTheme.colors.ultimateTitle,
+                modifier = Modifier.padding(3.dp)
+            )
+        }
+
+    }
 }

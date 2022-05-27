@@ -26,6 +26,10 @@ class ScheduleDrawerNavProvider : IScheduleDrawerNavProvider {
         _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Info)
     }
 
+    override fun navigateToSettings() {
+        _currentNavFlow.tryEmit(ScheduleDrawerDestinations.Settings)
+    }
+
     override fun popBack() {
         _currentNavFlow.tryEmit(ScheduleDrawerDestinations.PopBack)
     }

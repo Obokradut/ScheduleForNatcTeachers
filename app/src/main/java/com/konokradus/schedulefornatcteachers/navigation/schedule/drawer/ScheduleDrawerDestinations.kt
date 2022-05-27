@@ -5,5 +5,6 @@ sealed class ScheduleDrawerDestinations(val route: String) {
     object Favorites : ScheduleDrawerDestinations("favorites")
     object Offices : ScheduleDrawerDestinations("offices")
     object Info : ScheduleDrawerDestinations("info")
+    object Settings : ScheduleDrawerDestinations("settings")
     object PopBack : ScheduleDrawerDestinations("")
 }

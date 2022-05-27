@@ -52,7 +52,12 @@ fun ScheduleDrawerContainer(
                         scaffoldState.drawerState.close()
                     }
                 },
-                onOptionsClick = {},
+                onSettingsClick = {
+                    drawerViewModel.drawerNavProvider.navigateToSettings()
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                },
                 onTeachersListClick = {
                     drawerViewModel.drawerNavProvider.navigateToTeachersList()
                     coroutineScope.launch {

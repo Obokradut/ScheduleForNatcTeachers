@@ -42,7 +42,7 @@ constructor(
                     while (rs2!!.next()){
                         val lessonItem = LessonItem("","","","")
                         rs2.getString("disciplina").also { lesson ->
-                            lessonItem.lesson = lesson
+                            lessonItem.lesson = getLesson(lesson)
                         }
                         rs2.getString("vremya").also { time ->
                             lessonItem.timeStartEnd = time.replace(";","-")

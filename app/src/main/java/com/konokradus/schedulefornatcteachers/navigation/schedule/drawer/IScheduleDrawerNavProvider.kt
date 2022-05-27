@@ -8,5 +8,6 @@ interface IScheduleDrawerNavProvider {
     fun navigateToFavorites()
     fun navigateToOffices()
     fun navigateToInfo()
+    fun navigateToSettings()
     fun popBack()
 }

@@ -9,11 +9,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.konokradus.schedulefornatcteachers.modules.favorite.presentation.FavoriteScreen
 import com.konokradus.schedulefornatcteachers.modules.favorite.presentation.FavoriteViewModel
-import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainViewModel
-import com.konokradus.schedulefornatcteachers.modules.teacherslist.presentation.TeachersListViewModel
-import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.InfoScreen
 import com.konokradus.schedulefornatcteachers.modules.offices.presentation.OfficesScreen
+import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.InfoScreen
 import com.konokradus.schedulefornatcteachers.modules.schedule.presentation.components.TeachersListScreen
+import com.konokradus.schedulefornatcteachers.modules.settings.presentation.SettingsScreen
+import com.konokradus.schedulefornatcteachers.modules.teacherslist.presentation.TeachersListViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -68,6 +68,11 @@ fun ScheduleDrawerNavHost(
             route = ScheduleDrawerDestinations.Info.route
         ) {
             InfoScreen()
+        }
+        composable(
+            route = ScheduleDrawerDestinations.Settings.route
+        ) {
+            SettingsScreen()
         }
     }
 }

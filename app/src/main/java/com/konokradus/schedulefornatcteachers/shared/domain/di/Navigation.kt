@@ -1,8 +1,8 @@
 package com.konokradus.schedulefornatcteachers.shared.domain.di
 
 import com.konokradus.schedulefornatcteachers.navigation.schedule.drawer.IScheduleDrawerNavProvider
-import com.konokradus.schedulefornatcteachers.navigation.schedule.main.IScheduleMainNavProvider
 import com.konokradus.schedulefornatcteachers.navigation.schedule.drawer.ScheduleDrawerNavProvider
+import com.konokradus.schedulefornatcteachers.navigation.schedule.main.IScheduleMainNavProvider
 import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainNavProvider
 import dagger.Module
 import dagger.Provides

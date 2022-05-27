@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.konokradus.schedulefornatcteachers.navigation.schedule.main.ScheduleMainViewModel
 import com.konokradus.schedulefornatcteachers.modules.teacherslist.presentation.TeachersListViewState
 import com.konokradus.schedulefornatcteachers.ui.theme.ScheduleTheme
 
@@ -48,7 +47,7 @@ fun TeachersListScreen(
                                 .weight(1f),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator()
+                            CircularProgressIndicator(color = ScheduleTheme.colors.topBar)
                         }
                     }
                 }
@@ -69,7 +68,7 @@ fun TeachersListScreen(
                         }
                     }
                 }
-                else -> {}
+                is TeachersListViewState.Error -> {}
             }
         }
     }

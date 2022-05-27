@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -33,6 +32,7 @@ fun TopBar(
         ScheduleDrawerDestinations.Favorites.route -> TitlesTopBarImp.favorites
         ScheduleDrawerDestinations.Offices.route -> TitlesTopBarImp.offices
         ScheduleDrawerDestinations.Info.route -> TitlesTopBarImp.info
+        ScheduleDrawerDestinations.Settings.route -> TitlesTopBarImp.settings
         else -> ""
     }
 
